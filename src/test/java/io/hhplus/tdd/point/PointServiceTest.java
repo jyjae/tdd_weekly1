@@ -1,7 +1,7 @@
 package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.database.UserPointTable;
-import io.hhplus.tdd.point.controller.FindUserPointCommand;
+import io.hhplus.tdd.point.controller.FindPointCommand;
 import io.hhplus.tdd.point.domain.UserPoint;
 import io.hhplus.tdd.point.service.PointServiceImpl;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +27,7 @@ class PointServiceTest {
     @Test
     void testGetPoint() {
         // given
-        FindUserPointCommand command = FindUserPointCommand.builder()
+        FindPointCommand command = FindPointCommand.builder()
                 .id(1L)
                 .build();
 

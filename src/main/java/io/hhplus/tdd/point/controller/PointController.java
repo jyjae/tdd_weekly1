@@ -1,14 +1,11 @@
 package io.hhplus.tdd.point.controller;
 
-import io.hhplus.tdd.point.domain.PointHistory;
 import io.hhplus.tdd.point.service.PointService;
 import io.hhplus.tdd.point.domain.UserPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/point")
@@ -30,7 +27,7 @@ public class PointController {
             @PathVariable long id
     ) {
 
-        FindUserPointCommand command = FindUserPointCommand.builder()
+        FindPointCommand command = FindPointCommand.builder()
                 .id(id)
                 .build();
 

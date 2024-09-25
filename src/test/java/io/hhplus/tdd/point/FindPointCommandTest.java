@@ -1,7 +1,7 @@
 package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.exception.InvalidRequest;
-import io.hhplus.tdd.point.controller.FindUserPointCommand;
+import io.hhplus.tdd.point.controller.FindPointCommand;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +15,7 @@ class FindPointCommandTest {
         Long validId = 1L;
 
         // When
-        FindUserPointCommand command = FindUserPointCommand.builder().id(validId).build();
+        FindPointCommand command = FindPointCommand.builder().id(validId).build();
 
         // Then
         assertNotNull(command);
@@ -30,7 +30,7 @@ class FindPointCommandTest {
 
         // When
         InvalidRequest exception = assertThrows(InvalidRequest.class, () -> {
-            FindUserPointCommand.builder().id(invalidId).build();
+            FindPointCommand.builder().id(invalidId).build();
         });
 
         // Then
@@ -42,7 +42,7 @@ class FindPointCommandTest {
     void testNullIdThrowsException() {
         // When
         InvalidRequest exception = assertThrows(InvalidRequest.class, () -> {
-            FindUserPointCommand.builder().id(null).build();
+            FindPointCommand.builder().id(null).build();
         });
 
         // Then

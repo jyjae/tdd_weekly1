@@ -3,7 +3,7 @@ package io.hhplus.tdd.point.service;
 
 import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.domain.UserPoint;
-import io.hhplus.tdd.point.controller.FindUserPointCommand;
+import io.hhplus.tdd.point.controller.FindPointCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +19,14 @@ public class PointServiceImpl implements PointService {
 
 
     @Override
-    public UserPoint getPoint(FindUserPointCommand command) {
+    public UserPoint getPoint(FindPointCommand command) {
 
         return userPointTable.selectById(command.getId());
+    }
+
+    @Override
+    public UserPoint getPointById(Long id) {
+
+        return userPointTable.selectById(id);
     }
 }
