@@ -10,7 +10,7 @@ class FindPointCommandTest {
 
     @DisplayName("유효한 id로 FindUserPointCommand 생성")
     @Test
-    void testValidId() {
+    void shouldSucceedWhenCreatingFindUserPointCommandWithValidId() {
         // Given
         Long validId = 1L;
 
@@ -24,7 +24,7 @@ class FindPointCommandTest {
 
     @DisplayName("음수 id로 FindUserPointCommand 생성")
     @Test
-    void testInvalidIdThrowsException() {
+    void shouldFailWhenCreatingFindUserPointCommandWithNegativeId() {
         // Given
         Long invalidId = -1L;
 
@@ -39,7 +39,7 @@ class FindPointCommandTest {
 
     @DisplayName("null id로 FindUserPointCommand 생성")
     @Test
-    void testNullIdThrowsException() {
+    void shouldFailWhenCreatingFindUserPointCommandWithNullId() {
         // When
         InvalidRequest exception = assertThrows(InvalidRequest.class, () -> {
             FindPointCommand.builder().id(null).build();

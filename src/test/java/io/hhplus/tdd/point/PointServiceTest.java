@@ -25,7 +25,7 @@ class PointServiceTest {
 
     @DisplayName("포인트 조회")
     @Test
-    void testGetPoint() {
+    void shouldSucceedWhenRetrievingPoints() {
         // given
         FindPointCommand command = FindPointCommand.builder()
                 .id(1L)

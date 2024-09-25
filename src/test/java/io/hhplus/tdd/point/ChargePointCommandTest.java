@@ -13,7 +13,7 @@ public class ChargePointCommandTest {
 
     @DisplayName("유효한 ChargePointCommand 생성")
     @Test
-    void testValidId() {
+    void shouldSucceedWhenCreatingValidChargePointCommand() {
         // Given
         Long validId = 1L;
         Long validAmount = 1000L;
@@ -32,7 +32,7 @@ public class ChargePointCommandTest {
 
     @DisplayName("음수 id로 ChargePointCommand 생성")
     @Test
-    void testInvalidIdThrowsException() {
+    void shouldFailWhenCreatingChargePointCommandWithNegativeId() {
         // Given
         Long invalidId = -1L;
         Long validAmount = 1000L;
@@ -48,7 +48,7 @@ public class ChargePointCommandTest {
 
     @DisplayName("null id로 ChargePointCommand 생성")
     @Test
-    void testNullIdThrowsException() {
+    void shouldFailWhenCreatingChargePointCommandWithNullId() {
         // Given
         Long validAmount = 1000L;
 
@@ -63,7 +63,7 @@ public class ChargePointCommandTest {
 
     @DisplayName("null amount로 ChargePointCommand 생성")
     @Test
-    void testNullAmountThrowsException() {
+    void shouldFailWhenCreatingChargePointCommandWithNullAmount() {
         // Given
         Long validId = 1L;
 
@@ -77,7 +77,7 @@ public class ChargePointCommandTest {
     }
     @DisplayName("Long 최대값 초과된 amount로 ChargePointCommand 생성")
     @Test
-    void testAmountThrowsException() {
+    void shouldFailWhenCreatingChargePointCommandWithAmountExceedingLongMaxValue() {
         // Given
         Long validId = 1L;
         Long inValidAmount = Long.MAX_VALUE+1L;

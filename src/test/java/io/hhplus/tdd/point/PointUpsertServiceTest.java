@@ -30,9 +30,9 @@ public class PointUpsertServiceTest {
     @Mock
     private PointHistoryServiceImpl pointHistoryService;
 
-    @DisplayName("point값과 amount값을 합칠때 Long.MAX_VALUE 초과할 경우")
+    @DisplayName("point값과 amount값을 합칠때 Long.MAX_VALUE 초과할 경우 충전 실패")
     @Test
-    void 충전할때_point값과_amount값을_합칠때_초과할_경우() {
+    void shouldFailWhenSumOfPointAndAmountExceedsLongMaxValue() {
         // Given
         Long validId = 1L;
         Long validAmount = Long.MAX_VALUE;
@@ -50,7 +50,7 @@ public class PointUpsertServiceTest {
 
     @DisplayName("포인트 충전 성공")
     @Test
-    void 포인트_충전_성공() {
+    void shouldSucceedWhenChargingPoints() {
         // Given
         Long validId = 1L;
         Long validAmount = 100L;
@@ -68,6 +68,12 @@ public class PointUpsertServiceTest {
         // Then
         verify(userPointTable).insertOrUpdate(validId, 200L);
         verify(pointHistoryService).insert(org.mockito.ArgumentMatchers.any(AddPointHistoryCommand.class));
+    }
+
+    @DisplayName("유저 포인트보다 사용할 포인트가 더 클 경우 실패")
+    @Test
+    void shouldFailWhenUsingMorePointsThanUserHas() {
+
     }
 
 }

@@ -24,9 +24,9 @@ public class PointHistoryServiceTest {
     @Mock
     private PointHistoryTable pointHistoryTable;
 
-    @DisplayName("히스토리 저장")
+    @DisplayName("포인트 히스토리 저장 성공")
     @Test
-    void 히스토리_저장() {
+    void shouldSucceedWhenSavingPointHistoryOnPointCharge() {
 
         // Given
         Long validId = 1L;
