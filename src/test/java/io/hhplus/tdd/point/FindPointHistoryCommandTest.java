@@ -1,48 +1,52 @@
 package io.hhplus.tdd.point;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import io.hhplus.tdd.exception.InvalidRequestException;
 import io.hhplus.tdd.point.controller.FindPointCommand;
+import io.hhplus.tdd.point.controller.FindPointHistoryCommand;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-class FindPointCommandTest {
+class FindPointHistoryCommandTest {
 
-    @DisplayName("유효한 id로 FindUserPointCommand 생성")
+    @DisplayName("유효한 id로 FindPointHistoryCommand 생성")
     @Test
-    void shouldSucceedWhenCreatingFindUserPointCommandWithValidId() {
+    void shouldSucceedWhenCreatingFindPointHistoryCommandWithValidId() {
         // Given
         Long validId = 1L;
 
         // When
-        FindPointCommand command = FindPointCommand.toDto(validId);
+        FindPointHistoryCommand command = FindPointHistoryCommand.toDto(validId);
 
         // Then
         assertNotNull(command);
         assertEquals(validId, command.getId());
     }
 
-    @DisplayName("음수 id로 FindUserPointCommand 생성")
+    @DisplayName("음수 id로 FindPointHistoryCommand 생성")
     @Test
-    void shouldFailWhenCreatingFindUserPointCommandWithNegativeId() {
+    void shouldFailWhenCreatingFindPointHistoryCommandWithNegativeId() {
         // Given
         Long invalidId = -1L;
 
         // When
         InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> {
-            FindPointCommand.toDto(invalidId);
+            FindPointHistoryCommand.toDto(invalidId);
         });
 
         // Then
         assertEquals("ID는 0이상입니다.", exception.getMessage());
     }
 
-    @DisplayName("null id로 FindUserPointCommand 생성")
+    @DisplayName("null id로 FindPointHistoryCommand 생성")
     @Test
-    void shouldFailWhenCreatingFindUserPointCommandWithNullId() {
+    void shouldFailWhenCreatingFindPointHistoryCommandWithNullId() {
         // When
         InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> {
-            FindPointCommand.toDto(null);
+            FindPointHistoryCommand.toDto(null);
         });
 
         // Then

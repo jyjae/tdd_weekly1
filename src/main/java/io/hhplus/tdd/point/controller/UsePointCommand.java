@@ -26,4 +26,11 @@ public class UsePointCommand {
         this.id = id;
         this.amount = amount;
     }
+
+    public static UsePointCommand toDto(Long id, Long amount) {
+        return UsePointCommand.builder()
+            .id(id)
+            .amount(amount)
+            .build();
+    }
 }

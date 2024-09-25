@@ -18,4 +18,10 @@ public class FindPointCommand {
         }
         this.id = id;
     }
+
+    public static FindPointCommand toDto(Long id) {
+        return FindPointCommand.builder()
+                .id(id)
+                .build();
+    }
 }

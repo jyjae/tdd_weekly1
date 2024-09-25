@@ -9,6 +9,5 @@ import java.util.List;
 public interface PointHistoryService {
     PointHistory insert(AddPointHistoryCommand command);
 
-
     List<PointHistory> selectAll(FindPointHistoryCommand command);
 }

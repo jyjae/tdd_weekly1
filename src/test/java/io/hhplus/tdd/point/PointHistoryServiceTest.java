@@ -82,14 +82,10 @@ public class PointHistoryServiceTest {
     void shouldSucceedWhenGetPointHistory() {
         // Given
         Long validId = 1L;
-
-        FindPointHistoryCommand command = FindPointHistoryCommand.builder()
-                .id(validId)
-                .build();
         when(pointHistoryTable.selectAllByUserId(validId)).thenReturn(expectedHistories);
 
         // When
-        List<PointHistory> pointHistories = pointHistoryService.selectAll(command);
+        List<PointHistory> pointHistories = pointHistoryService.selectAll(FindPointHistoryCommand.toDto(validId));
 
         // Then
         assertThat(pointHistories).hasSize(2);

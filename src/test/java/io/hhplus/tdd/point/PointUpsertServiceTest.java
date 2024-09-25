@@ -36,10 +36,7 @@ public class PointUpsertServiceTest {
         Long validId = 1L;
         Long validAmount = Long.MAX_VALUE;
 
-        ChargePointCommand command = ChargePointCommand.builder()
-                .id(validId)
-                .amount(validAmount)
-                .build();
+        ChargePointCommand command = ChargePointCommand.toDto(validId, validAmount);
 
         // When
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 100L, System.currentTimeMillis()));
@@ -61,10 +58,7 @@ public class PointUpsertServiceTest {
         Long validId = 1L;
         Long validAmount = 100L;
 
-        ChargePointCommand command = ChargePointCommand.builder()
-                .id(validId)
-                .amount(validAmount)
-                .build();
+        ChargePointCommand command = ChargePointCommand.toDto(validId, validAmount);
 
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 100L, System.currentTimeMillis()));
         when(userPointTable.insertOrUpdate(anyLong(), anyLong())).thenReturn(new UserPoint(validId, 200L, System.currentTimeMillis()));
@@ -86,10 +80,7 @@ public class PointUpsertServiceTest {
         Long validId = 1L;
         Long validAmount = 100L;
 
-        UsePointCommand command = UsePointCommand.builder()
-                .id(validId)
-                .amount(validAmount)
-                .build();
+        UsePointCommand command = UsePointCommand.toDto(validId, validAmount);
 
         // When
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 0L, System.currentTimeMillis()));
@@ -111,10 +102,7 @@ public class PointUpsertServiceTest {
         Long validId = 1L;
         Long validAmount = 100L;
 
-        UsePointCommand command = UsePointCommand.builder()
-                .id(validId)
-                .amount(validAmount)
-                .build();
+        UsePointCommand command = UsePointCommand.toDto(validId, validAmount);
 
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 1000L, System.currentTimeMillis()));
         when(userPointTable.insertOrUpdate(anyLong(), anyLong())).thenReturn(new UserPoint(validId, 900L, System.currentTimeMillis()));

@@ -19,10 +19,7 @@ public class ChargePointCommandTest {
         Long validAmount = 1000L;
 
         // When
-        ChargePointCommand command = ChargePointCommand.builder()
-                .id(validId)
-                .amount(validAmount)
-                .build();
+        ChargePointCommand command = ChargePointCommand.toDto(validId, validAmount);
 
         // Then
         assertThat(command.getId()).isEqualTo(validId);
@@ -38,7 +35,7 @@ public class ChargePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            ChargePointCommand.builder().id(invalidId).amount(validAmount).build();
+            ChargePointCommand.toDto(invalidId, validAmount);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("ID는 0이상입니다.");
@@ -52,7 +49,7 @@ public class ChargePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            ChargePointCommand.builder().id(null).amount(validAmount).build();
+            ChargePointCommand.toDto(null, validAmount);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("ID는 null일 수 없습니다.");
@@ -66,7 +63,7 @@ public class ChargePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            ChargePointCommand.builder().id(validId).amount(null).build();
+            ChargePointCommand.toDto(validId, null);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("amount는 null일 수 없습니다.");
@@ -80,7 +77,7 @@ public class ChargePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            ChargePointCommand.builder().id(validId).amount(inValidAmount).build();
+            ChargePointCommand.toDto(validId, inValidAmount);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("amount값이 너무 큽니다.");

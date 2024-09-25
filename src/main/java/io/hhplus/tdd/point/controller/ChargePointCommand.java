@@ -26,4 +26,11 @@ public class ChargePointCommand {
         this.id = id;
         this.amount = amount;
     }
+
+    public static ChargePointCommand toDto(Long id, Long amount) {
+        return ChargePointCommand.builder()
+            .id(id)
+            .amount(amount)
+            .build();
+    }
 }

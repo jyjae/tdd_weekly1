@@ -20,10 +20,7 @@ public class UsePointCommandTest {
         Long validAmount = 1000L;
 
         // When
-        UsePointCommand command = UsePointCommand.builder()
-                .id(validId)
-                .amount(validAmount)
-                .build();
+        UsePointCommand command = UsePointCommand.toDto(validId, validAmount);
 
         // Then
         assertThat(command.getId()).isEqualTo(validId);
@@ -39,7 +36,7 @@ public class UsePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            UsePointCommand.builder().id(invalidId).amount(validAmount).build();
+            UsePointCommand.toDto(invalidId, validAmount);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("ID는 0이상입니다.");
@@ -53,7 +50,7 @@ public class UsePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            UsePointCommand.builder().id(null).amount(validAmount).build();
+            UsePointCommand.toDto(null, validAmount);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("ID는 null일 수 없습니다.");
@@ -67,7 +64,7 @@ public class UsePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            UsePointCommand.builder().id(validId).amount(null).build();
+            UsePointCommand.toDto(validId, null);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("amount는 null일 수 없습니다.");
@@ -81,7 +78,7 @@ public class UsePointCommandTest {
 
         // When & Then
         assertThatThrownBy(() -> {
-            UsePointCommand.builder().id(validId).amount(inValidAmount).build();
+            UsePointCommand.toDto(validId, inValidAmount);
         })
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage("amount값이 너무 큽니다.");

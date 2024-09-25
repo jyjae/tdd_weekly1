@@ -18,4 +18,11 @@ public class FindPointHistoryCommand {
         }
         this.id = id;
     }
+
+    public static FindPointHistoryCommand toDto(Long id) {
+        return FindPointHistoryCommand.
+            builder()
+            .id(id)
+            .build();
+    }
 }

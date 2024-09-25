@@ -27,9 +27,7 @@ class PointServiceTest {
     @Test
     void shouldSucceedWhenRetrievingPoints() {
         // given
-        FindPointCommand command = FindPointCommand.builder()
-                .id(1L)
-                .build();
+        FindPointCommand command = FindPointCommand.toDto(1L);
 
         // when
         when(userPointTable.selectById(command.getId())).thenReturn(UserPoint.empty(command.getId()));

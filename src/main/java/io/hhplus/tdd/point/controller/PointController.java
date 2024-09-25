@@ -20,18 +20,16 @@ public class PointController {
     }
 
     /**
-     * TODO - 특정 유저의 포인트를 조회하는 기능을 작성해주세요.
+     * 특정 유저의 포인트를 조회하는 API
+     * @param id - 유저 ID
+     * @return - 유저의 포인트 정보를 담은 ResponseEntity
      */
     @GetMapping("{id}")
     public ResponseEntity<UserPoint> point(
             @PathVariable long id
     ) {
-
-        FindPointCommand command = FindPointCommand.builder()
-                .id(id)
-                .build();
-
-        return ResponseEntity.ok(pointService.getPoint(command));
+        log.info("Received request to fetch points for user ID: {}", id);
+        return ResponseEntity.ok(pointService.getPoint(FindPointCommand.toDto(id)));
     }
 
 }
