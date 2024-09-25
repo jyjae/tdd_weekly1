@@ -5,25 +5,17 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ChargePointCommand {
+public class FindPointHistoryCommand {
     private Long id;
-    private Long amount;
 
     @Builder
-    public ChargePointCommand(Long id, Long amount) {
+    public FindPointHistoryCommand(Long id) {
         if (id == null) {
             throw new InvalidRequestException("ID는 null일 수 없습니다.");
         }
         if (id < 0) {
             throw new InvalidRequestException("ID는 0이상입니다.");
         }
-        if (amount == null) {
-            throw new InvalidRequestException("amount는 null일 수 없습니다.");
-        }
-        if (Long.MAX_VALUE - amount < 0 ) {
-            throw new InvalidRequestException("amount값이 너무 큽니다.");
-        }
         this.id = id;
-        this.amount = amount;
     }
 }

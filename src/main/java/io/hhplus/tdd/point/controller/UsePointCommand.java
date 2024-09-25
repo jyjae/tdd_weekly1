@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ChargePointCommand {
+public class UsePointCommand {
     private Long id;
     private Long amount;
 
     @Builder
-    public ChargePointCommand(Long id, Long amount) {
+    public UsePointCommand(Long id, Long amount) {
         if (id == null) {
             throw new InvalidRequestException("ID는 null일 수 없습니다.");
         }

@@ -20,6 +20,7 @@ public class PointHistoryController {
             @PathVariable long id
     ) {
 
+//        FindPointHistoryCommand command = FindPointHistoryCommand
         return List.of();
     }
 }

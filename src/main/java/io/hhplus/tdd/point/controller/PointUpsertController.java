@@ -41,10 +41,16 @@ public class PointUpsertController {
      * TODO - 특정 유저의 포인트를 사용하는 기능을 작성해주세요.
      */
     @PatchMapping("{id}/use")
-    public UserPoint use(
+    public ResponseEntity<UserPoint> use(
             @PathVariable long id,
             @RequestBody long amount
     ) {
-        return new UserPoint(0, 0, 0);
+
+        UsePointCommand command = UsePointCommand.builder()
+                .id(id)
+                .amount(amount)
+                .build();
+
+        return ResponseEntity.ok(pointUpsertService.use(command));
     }
 }

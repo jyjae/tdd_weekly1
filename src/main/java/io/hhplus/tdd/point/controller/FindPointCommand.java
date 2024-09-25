@@ -1,6 +1,6 @@
 package io.hhplus.tdd.point.controller;
 
-import io.hhplus.tdd.exception.InvalidRequest;
+import io.hhplus.tdd.exception.InvalidRequestException;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,10 +11,10 @@ public class FindPointCommand {
     @Builder
     public FindPointCommand(Long id) {
         if (id == null) {
-            throw new InvalidRequest("ID는 null일 수 없습니다.");
+            throw new InvalidRequestException("ID는 null일 수 없습니다.");
         }
         if (id < 0) {
-            throw new InvalidRequest("ID는 0이상입니다.");
+            throw new InvalidRequestException("ID는 0이상입니다.");
         }
         this.id = id;
     }
