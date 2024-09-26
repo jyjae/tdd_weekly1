@@ -1,5 +1,6 @@
 package io.hhplus.tdd.point;
 
+import io.hhplus.tdd.UserLockManager;
 import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.exception.LongOverflowException;
 import io.hhplus.tdd.exception.NotEnoughPointsException;
@@ -15,6 +16,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.concurrent.Callable;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
@@ -28,10 +32,12 @@ public class PointUpsertServiceTest {
     private UserPointTable userPointTable;
     @Mock
     private PointHistoryServiceImpl pointHistoryService;
+    @Mock
+    private UserLockManager userLockManager;
 
     @DisplayName("point값과 amount값을 합칠때 Long.MAX_VALUE 초과할 경우 충전 실패")
     @Test
-    void shouldFailWhenSumOfPointAndAmountExceedsLongMaxValue() {
+    void shouldFailWhenSumOfPointAndAmountExceedsLongMaxValue() throws Exception {
         // Given
         Long validId = 1L;
         Long validAmount = Long.MAX_VALUE;
@@ -39,6 +45,12 @@ public class PointUpsertServiceTest {
         ChargePointCommand command = ChargePointCommand.toDto(validId, validAmount);
 
         // When
+        when(userLockManager.executeWithLock(eq(validId), any(Callable.class)))
+                .thenAnswer(invocation -> {
+                    Callable<?> callable = invocation.getArgument(1);
+                    return callable.call();
+                });
+
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 100L, System.currentTimeMillis()));
 
         // Then
@@ -59,6 +71,12 @@ public class PointUpsertServiceTest {
         Long validAmount = 100L;
 
         ChargePointCommand command = ChargePointCommand.toDto(validId, validAmount);
+
+        when(userLockManager.executeWithLock(eq(validId), any(Callable.class)))
+                .thenAnswer(invocation -> {
+                    Callable<?> callable = invocation.getArgument(1);
+                    return callable.call();
+                });
 
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 100L, System.currentTimeMillis()));
         when(userPointTable.insertOrUpdate(anyLong(), anyLong())).thenReturn(new UserPoint(validId, 200L, System.currentTimeMillis()));
@@ -83,6 +101,12 @@ public class PointUpsertServiceTest {
         UsePointCommand command = UsePointCommand.toDto(validId, validAmount);
 
         // When
+        when(userLockManager.executeWithLock(eq(validId), any(Callable.class)))
+                .thenAnswer(invocation -> {
+                    Callable<?> callable = invocation.getArgument(1);
+                    return callable.call();
+                });
+
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 0L, System.currentTimeMillis()));
 
         // Then
@@ -103,6 +127,12 @@ public class PointUpsertServiceTest {
         Long validAmount = 100L;
 
         UsePointCommand command = UsePointCommand.toDto(validId, validAmount);
+
+        when(userLockManager.executeWithLock(eq(validId), any(Callable.class)))
+                .thenAnswer(invocation -> {
+                    Callable<?> callable = invocation.getArgument(1);
+                    return callable.call();
+                });
 
         when(userPointTable.selectById(validId)).thenReturn(new UserPoint(validId, 1000L, System.currentTimeMillis()));
         when(userPointTable.insertOrUpdate(anyLong(), anyLong())).thenReturn(new UserPoint(validId, 900L, System.currentTimeMillis()));
