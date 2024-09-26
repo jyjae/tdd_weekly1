@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hhplus-tdd-jvm.iml" filepath="$PROJECT_DIR$/.idea/modules/hhplus-tdd-jvm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hhplus-tdd-jvm.main.iml" filepath="$PROJECT_DIR$/.idea/modules/hhplus-tdd-jvm.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hhplus-tdd-jvm.test.iml" filepath="$PROJECT_DIR$/.idea/modules/hhplus-tdd-jvm.test.iml" />
+    </modules>
+  </component>
+</project>
